@@ -1,0 +1,31 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.10'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.9.10'
+    id 'org.springframework.boot' version '3.1.3'
+    id 'io.spring.dependency-management' version '1.1.3'
+
+    id 'application'
+}
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.1.2'
+    implementation 'org.yaml:snakeyaml:2.0'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.10'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools:3.1.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.2'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test:1.9.10'
+}
+
+tasks.named('compileKotlin', KotlinCompilationTask.class) {
+    compilerOptions {
+        freeCompilerArgs.add("-Xjsr305=strict")
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
